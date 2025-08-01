@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %> - <%= siteTitle %></title>
+  <title>help - Documentation</title>
   <style>
     * {
       margin: 0;
@@ -258,18 +258,128 @@
   <div class="container">
     <nav class="sidebar">
       <div class="sidebar-header">
-        <h1><%= siteTitle %></h1>
+        <h1>Documentation</h1>
       </div>
       <ul class="nav-menu">
-        <% navigation.forEach(function(item) { %>
-          <li><a href="<%= item.href %>" class="<%= title === item.title ? 'active' : '' %>"><%= item.displayName %></a></li>
-        <% }); %>
+        
+          <li><a href="intro.html" class="">Introduction</a></li>
+        
+          <li><a href="test.html" class="">Test</a></li>
+        
+          <li><a href="help.html" class="active">Help Guide</a></li>
+        
+          <li><a href="example.html" class="">Examples</a></li>
+        
       </ul>
     </nav>
 
     <main class="main-content">
       <div class="content">
-        <%- content %>
+        <h1>Help: Building a Docs Site with Markdown and markdown-it</h1>
+<p>This guide explains how to use <code>.md</code> files and the <code>markdown-it</code> library to build a documentation site from scratch.</p>
+<hr>
+<h2>What is Markdown?</h2>
+<p>Markdown is a lightweight markup language for formatting text.<br>
+Files with the <code>.md</code> extension use Markdown syntax.</p>
+<h3>Common Markdown Syntax</h3>
+<ul>
+<li><strong>Headings:</strong><pre><code># Heading 1
+## Heading 2
+### Heading 3
+</code></pre>
+</li>
+<li><strong>Bold &amp; Italic:</strong><pre><code>**bold**
+*italic*
+</code></pre>
+</li>
+<li><strong>Lists:</strong><pre><code>- Item 1
+- Item 2
+</code></pre>
+</li>
+<li><strong>Links:</strong><pre><code>[External Site](https://example.com)
+[Local File](./other.md)
+</code></pre>
+</li>
+<li><strong>Images:</strong><pre><code>![Alt Text](https://example.com/image.png)
+</code></pre>
+</li>
+<li><strong>Code Blocks:</strong><pre><code>```js
+console.log('Hello, world!');
+</code></pre>
+<pre><code>
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2>Using markdown-it</h2>
+<p><a href="https://github.com/markdown-it/markdown-it"><code>markdown-it</code></a> is a fast Markdown parser for JavaScript.</p>
+<h3>Basic Usage</h3>
+<ol>
+<li>
+<p><strong>Install markdown-it:</strong></p>
+<pre><code>npm install markdown-it
+</code></pre>
+</li>
+<li>
+<p><strong>Parse Markdown in Node.js:</strong></p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> <span class="hljs-title class_">MarkdownIt</span> = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;markdown-it&#x27;</span>);
+<span class="hljs-keyword">const</span> md = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MarkdownIt</span>();
+<span class="hljs-keyword">const</span> result = md.<span class="hljs-title function_">render</span>(<span class="hljs-string">&#x27;# Hello Markdown!&#x27;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result); <span class="hljs-comment">// Outputs HTML</span>
+</code></pre>
+</li>
+</ol>
+<hr>
+<h2>Building a Docs Site</h2>
+<h3>Essential Components</h3>
+<ul>
+<li>
+<p><strong>Markdown Files (<code>.md</code>):</strong><br>
+Write your documentation in Markdown files.</p>
+</li>
+<li>
+<p><strong>Express Server:</strong><br>
+Serve your docs using <a href="https://expressjs.com/">Express</a>.</p>
+</li>
+<li>
+<p><strong>markdown-it:</strong><br>
+Convert Markdown to HTML on the server.</p>
+</li>
+<li>
+<p><strong>Templates:</strong><br>
+Use EJS or another templating engine for consistent layouts.</p>
+</li>
+</ul>
+<h3>Example Workflow</h3>
+<ol>
+<li>
+<p><strong>Create Markdown Files:</strong><br>
+Place docs in a <code>docs/</code> folder.</p>
+</li>
+<li>
+<p><strong>Set Up Express Server:</strong><br>
+Serve static files and render Markdown.</p>
+</li>
+<li>
+<p><strong>Render Markdown:</strong><br>
+Use <code>markdown-it</code> to convert <code>.md</code> files to HTML.</p>
+</li>
+<li>
+<p><strong>Use Templates:</strong><br>
+Wrap rendered HTML in a layout template.</p>
+</li>
+</ol>
+<hr>
+<h2>Useful Tips</h2>
+<ul>
+<li>Organize docs by topic in subfolders.</li>
+<li>Link between docs using relative paths.</li>
+<li>Use images and code blocks for clarity.</li>
+<li>Preview Markdown locally before publishing.</li>
+</ul>
+<hr>
+<p>For more details, see the <a href="https://github.com/markdown-it/markdown-it">markdown-it documentation</a> and <a href="https://www.markdownguide.org/">Markdown Guide</a></p>
+
       </div>
     </main>
   </div>

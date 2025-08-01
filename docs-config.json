@@ -1,0 +1,24 @@
+{
+  "navigation": {
+    "intro": {
+      "displayName": "Introduction",
+      "order": 1
+    },
+    "test": {
+      "displayName": "Test",
+      "order": 2
+    },
+    "help": {
+      "displayName": "Help Guide",
+      "order": 3
+    },
+    "example": {
+      "displayName": "Examples",
+      "order": 4
+    }
+  },
+  "site": {
+    "title": "Documentation",
+    "description": "A simple and elegant documentation site"
+  }
+} 

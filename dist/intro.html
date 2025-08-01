@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %> - <%= siteTitle %></title>
+  <title>intro - Documentation</title>
   <style>
     * {
       margin: 0;
@@ -258,18 +258,36 @@
   <div class="container">
     <nav class="sidebar">
       <div class="sidebar-header">
-        <h1><%= siteTitle %></h1>
+        <h1>Documentation</h1>
       </div>
       <ul class="nav-menu">
-        <% navigation.forEach(function(item) { %>
-          <li><a href="<%= item.href %>" class="<%= title === item.title ? 'active' : '' %>"><%= item.displayName %></a></li>
-        <% }); %>
+        
+          <li><a href="intro.html" class="active">Introduction</a></li>
+        
+          <li><a href="test.html" class="">Test</a></li>
+        
+          <li><a href="help.html" class="">Help Guide</a></li>
+        
+          <li><a href="example.html" class="">Examples</a></li>
+        
       </ul>
     </nav>
 
     <main class="main-content">
       <div class="content">
-        <%- content %>
+        <h1>Welcome</h1>
+<p>This is a test doc with more complexity.</p>
+<h2>External Link</h2>
+<p>Visit <a href="https://github.com/">GitHub</a> for more information.</p>
+<h2>Local File Link</h2>
+<p>See the <a href="./test.html">Test Doc</a> for additional details.</p>
+<h2>Image from the Web</h2>
+<p><img src="https://markdown-here.com/img/icon256.png" alt="Markdown Logo"></p>
+<ul>
+<li>Item 1</li>
+<li></li>
+</ul>
+
       </div>
     </main>
   </div>

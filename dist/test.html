@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %> - <%= siteTitle %></title>
+  <title>test - Documentation</title>
   <style>
     * {
       margin: 0;
@@ -258,18 +258,31 @@
   <div class="container">
     <nav class="sidebar">
       <div class="sidebar-header">
-        <h1><%= siteTitle %></h1>
+        <h1>Documentation</h1>
       </div>
       <ul class="nav-menu">
-        <% navigation.forEach(function(item) { %>
-          <li><a href="<%= item.href %>" class="<%= title === item.title ? 'active' : '' %>"><%= item.displayName %></a></li>
-        <% }); %>
+        
+          <li><a href="intro.html" class="">Introduction</a></li>
+        
+          <li><a href="test.html" class="active">Test</a></li>
+        
+          <li><a href="help.html" class="">Help Guide</a></li>
+        
+          <li><a href="example.html" class="">Examples</a></li>
+        
       </ul>
     </nav>
 
     <main class="main-content">
       <div class="content">
-        <%- content %>
+        <h1>Test doc</h1>
+<p>This is a test doc</p>
+<h5>works right?</h5>
+<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+</ul>
+
       </div>
     </main>
   </div>
