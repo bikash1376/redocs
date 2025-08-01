@@ -20,6 +20,19 @@ const md = require('markdown-it')({
   }
 })
 
+// Add target="_blank" to external links
+md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+  const token = tokens[idx];
+  const href = token.attrs.find(attr => attr[0] === 'href');
+  
+  if (href && href[1].startsWith('http')) {
+    token.attrSet('target', '_blank');
+    token.attrSet('rel', 'noopener noreferrer');
+  }
+  
+  return self.renderToken(tokens, idx, options);
+};
+
 const docsDir = path.join(__dirname, '..', 'docs')
 const distDir = path.join(__dirname, '..', 'dist')
 const layoutPath = path.join(__dirname, '..', 'templates', 'layout.html')
@@ -80,16 +93,16 @@ files.forEach(file => {
 
 console.log(`\n🎉 Documentation build complete! Files generated in: ${distDir}`)
 
-// Create an index.html file that redirects to intro.html
+// Create an index.html file that redirects to getting-started.html
 const indexHtml = `<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=intro.html">
+    <meta http-equiv="refresh" content="0; url=getting-started.html">
     <title>${config.site.title}</title>
 </head>
 <body>
-    <p>Redirecting to <a href="intro.html">documentation</a>...</p>
+    <p>Redirecting to <a href="getting-started.html">documentation</a>...</p>
 </body>
 </html>`;
 

@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>components - Redocs Documentation</title>
+  <style>
+    /* Theme Variables */
+    :root {
+      --bg-primary: #f8f9fa;
+      --bg-secondary: #fff;
+      --text-primary: #333;
+      --text-secondary: #586069;
+      --border-color: #e1e4e8;
+      --accent-color: #0366d6;
+      --accent-hover: #024ea4;
+      --code-bg: #f6f8fa;
+      --sidebar-bg: #fff;
+      --nav-hover: #f6f8fa;
+      --nav-active: #0366d6;
+      --nav-active-text: white;
+    }
+
+    /* Dark Theme */
+    [data-theme="dark"] {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --text-primary: #c9d1d9;
+      --text-secondary: #8b949e;
+      --border-color: #30363d;
+      --accent-color: #58a6ff;
+      --accent-hover: #79c0ff;
+      --code-bg: #21262d;
+      --sidebar-bg: #161b22;
+      --nav-hover: #21262d;
+      --nav-active: #58a6ff;
+      --nav-active-text: #0d1117;
+    }
+
+    /* Theme Switcher */
+    .theme-switcher {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .theme-switcher button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 4px;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .theme-switcher button:hover {
+      background: var(--nav-hover);
+      color: var(--text-primary);
+    }
+
+    .theme-switcher button.active {
+      background: var(--accent-color);
+      color: var(--nav-active-text);
+    }
+
+    .theme-switcher .icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background-color: var(--bg-primary);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-color);
+      padding: 2rem 0;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      padding: 0 2rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-header h1 {
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 0 1rem;
+    }
+
+    .nav-menu li {
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-menu a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-menu a:hover {
+      background-color: var(--nav-hover);
+      color: var(--text-primary);
+    }
+
+    .nav-menu a.active {
+      background-color: var(--nav-active);
+      color: var(--nav-active-text);
+    }
+
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 2rem;
+      background: var(--bg-secondary);
+      min-height: 100vh;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 2rem 0 1rem;
+      padding-top: 1rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    h4, h5, h6 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 1rem 0 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    /* Links */
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin: 1rem 0;
+      padding-left: 2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Code blocks */
+    pre {
+      background-color: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    code {
+      background-color: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      padding: 0.2rem 0.4rem;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 0.9em;
+    }
+
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    /* Blockquotes */
+    blockquote {
+      border-left: 4px solid var(--accent-color);
+      padding-left: 1rem;
+      margin: 1rem 0;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: var(--code-bg);
+      font-weight: 600;
+    }
+
+    /* Images */
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin: 1rem 0;
+    }
+
+    /* Horizontal rule */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 2rem 0;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+
+      .content {
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Syntax highlighting colors */
+    .hljs-keyword { color: #d73a49; }
+    .hljs-string { color: #032f62; }
+    .hljs-comment { color: #6a737d; }
+    .hljs-function { color: #6f42c1; }
+    .hljs-number { color: #005cc5; }
+  </style>
+</head>
+<body>
+  <!-- Theme Switcher -->
+  <div class="theme-switcher">
+    <button id="light-theme" class="active" title="Light Theme">
+      <span class="icon">☀️</span>
+    </button>
+    <button id="dark-theme" title="Dark Theme">
+      <span class="icon">🌙</span>
+    </button>
+  </div>
+
+  <div class="container">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Redocs Documentation</h1>
+      </div>
+      <ul class="nav-menu">
+        
+          <li><a href="getting-started.html" class="">Getting Started</a></li>
+        
+          <li><a href="features.html" class="">Features</a></li>
+        
+          <li><a href="components.html" class="active">Components</a></li>
+        
+          <li><a href="example.html" class="">Examples</a></li>
+        
+          <li><a href="try-it.html" class="">Try It</a></li>
+        
+          <li><a href="support.html" class="">Support</a></li>
+        
+      </ul>
+    </nav>
+
+    <main class="main-content">
+      <div class="content">
+        <h1>Markdown Components &amp; Elements</h1>
+<p>Redocs supports all standard Markdown syntax plus additional features from markdown-it. This guide covers every component you can use in your documentation.</p>
+<h2>📝 Basic Text Elements</h2>
+<h3>Headers</h3>
+<p>Create hierarchical document structure with headers:</p>
+<pre><code class="language-markdown"><span class="hljs-section"># Heading 1</span>
+<span class="hljs-section">## Heading 2</span>
+<span class="hljs-section">### Heading 3</span>
+<span class="hljs-section">#### Heading 4</span>
+<span class="hljs-section">##### Heading 5</span>
+<span class="hljs-section">###### Heading 6</span>
+</code></pre>
+<p><strong>Renders as:</strong></p>
+<ul>
+<li><strong>H1</strong> - Large, prominent heading with bottom border</li>
+<li><strong>H2</strong> - Section heading with top padding</li>
+<li><strong>H3</strong> - Subsection heading</li>
+<li><strong>H4-H6</strong> - Smaller subsection headings</li>
+</ul>
+<h3>Paragraphs</h3>
+<p>Regular text content:</p>
+<pre><code class="language-markdown">This is a regular paragraph with normal text.
+
+This is another paragraph separated by a blank line.
+</code></pre>
+<h3>Emphasis</h3>
+<p>Add emphasis to your text:</p>
+<pre><code class="language-markdown"><span class="hljs-emphasis">*This text is italic*</span>
+<span class="hljs-emphasis">_This is also italic_</span>
+
+<span class="hljs-strong">**This text is bold**</span>
+<span class="hljs-strong">__This is also bold__</span>
+
+<span class="hljs-strong">**<span class="hljs-emphasis">*This text is bold and italic*</span>**</span>
+<span class="hljs-strong">__<span class="hljs-emphasis">_This is also bold and italic_</span>__</span>
+</code></pre>
+<h3>Inline Code</h3>
+<p>Highlight code within text:</p>
+<pre><code class="language-markdown">Use the <span class="hljs-code">`npm install`</span> command to install dependencies.
+</code></pre>
+<h2>🔗 Links &amp; References</h2>
+<h3>External Links</h3>
+<p>Link to external websites:</p>
+<pre><code class="language-markdown">[<span class="hljs-string">Visit GitHub</span>](<span class="hljs-link">https://github.com/</span>)
+[<span class="hljs-string">External Documentation</span>](<span class="hljs-link">https://example.com &quot;Optional title&quot;</span>)
+</code></pre>
+<h3>Internal Links</h3>
+<p>Link to other pages in your documentation:</p>
+<pre><code class="language-markdown">[<span class="hljs-string">See the Introduction</span>](<span class="hljs-link">./intro.html</span>)
+[<span class="hljs-string">Check out Examples</span>](<span class="hljs-link">./example.html</span>)
+</code></pre>
+<h3>Reference Links</h3>
+<p>Create reusable link references:</p>
+<pre><code class="language-markdown">[<span class="hljs-string">GitHub</span>][<span class="hljs-symbol">github-link</span>]
+[<span class="hljs-string">Documentation</span>][<span class="hljs-symbol">docs-link</span>]
+
+[<span class="hljs-symbol">github-link</span>]: <span class="hljs-link">https://github.com/</span>
+[<span class="hljs-symbol">docs-link</span>]: <span class="hljs-link">https://example.com &quot;Documentation site&quot;</span>
+</code></pre>
+<h2>🖼️ Images</h2>
+<h3>Basic Images</h3>
+<p>Add images to your documentation:</p>
+<pre><code class="language-markdown">![<span class="hljs-string">Alt text</span>](<span class="hljs-link">https://example.com/image.png</span>)
+![<span class="hljs-string">Logo</span>](<span class="hljs-link">https://example.com/logo.png &quot;Company Logo&quot;</span>)
+</code></pre>
+<h3>Local Images</h3>
+<p>Reference local image files:</p>
+<pre><code class="language-markdown">![<span class="hljs-string">Screenshot</span>](<span class="hljs-link">./images/screenshot.png</span>)
+![<span class="hljs-string">Diagram</span>](<span class="hljs-link">./assets/diagram.svg &quot;System Architecture&quot;</span>)
+</code></pre>
+<h3>Image with Links</h3>
+<p>Make images clickable:</p>
+<pre><code class="language-markdown">[<span class="hljs-string">![Click me</span>](<span class="hljs-link">https://example.com/image.png</span>)](<span class="hljs-link">https://example.com/</span>)
+</code></pre>
+<h2>📋 Lists</h2>
+<h3>Unordered Lists</h3>
+<p>Create bullet point lists:</p>
+<pre><code class="language-markdown"><span class="hljs-bullet">-</span> Item 1
+<span class="hljs-bullet">-</span> Item 2
+<span class="hljs-bullet">-</span> Item 3
+
+<span class="hljs-bullet">*</span> Alternative bullet style
+<span class="hljs-bullet">*</span> Another item
+<span class="hljs-bullet">*</span> Third item
+</code></pre>
+<h3>Ordered Lists</h3>
+<p>Create numbered lists:</p>
+<pre><code class="language-markdown"><span class="hljs-bullet">1.</span> First step
+<span class="hljs-bullet">2.</span> Second step
+<span class="hljs-bullet">3.</span> Third step
+
+<span class="hljs-bullet">1.</span> Start with any number
+<span class="hljs-bullet">5.</span> Continue with any number
+<span class="hljs-bullet">10.</span> Numbers will be corrected automatically
+</code></pre>
+<h3>Nested Lists</h3>
+<p>Create hierarchical lists:</p>
+<pre><code class="language-markdown"><span class="hljs-bullet">-</span> Main item
+<span class="hljs-bullet">  -</span> Sub item
+<span class="hljs-bullet">    -</span> Sub-sub item
+<span class="hljs-bullet">  -</span> Another sub item
+<span class="hljs-bullet">-</span> Another main item
+<span class="hljs-bullet">  1.</span> Numbered sub item
+<span class="hljs-bullet">  2.</span> Another numbered sub item
+</code></pre>
+<h3>Task Lists</h3>
+<p>Create checkable task lists:</p>
+<pre><code class="language-markdown"><span class="hljs-bullet">-</span> [x] Completed task
+<span class="hljs-bullet">-</span> [ ] Pending task
+<span class="hljs-bullet">-</span> [ ] Another pending task
+</code></pre>
+<h2>💻 Code Blocks</h2>
+<h3>Fenced Code Blocks</h3>
+<p>Create syntax-highlighted code blocks:</p>
+<pre><code class="language-markdown"><span class="hljs-code">```javascript
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet(&#x27;World&#x27;));
+```</span>
+</code></pre>
+<h3>Language-Specific Highlighting</h3>
+<p>Specify the programming language:</p>
+<pre><code class="language-markdown"><span class="hljs-code">```python
+def greet(name):
+    return f&quot;Hello, {name}!&quot;
+
+print(greet(&quot;World&quot;))
+```</span>
+
+<span class="hljs-code">```css
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+```</span>
+
+<span class="hljs-code">```html
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;My Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello World&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+```</span>
+</code></pre>
+<h3>Inline Code</h3>
+<p>Highlight code within text:</p>
+<pre><code class="language-markdown">Use the <span class="hljs-code">`console.log()`</span> function to output to the console.
+</code></pre>
+<h3>Indented Code Blocks</h3>
+<p>Alternative syntax for code blocks:</p>
+<pre><code class="language-markdown"><span class="hljs-code">    function example() {
+      return &quot;This is indented code&quot;;
+    }
+</span></code></pre>
+<h2>📊 Tables</h2>
+<h3>Basic Tables</h3>
+<p>Create structured data tables:</p>
+<pre><code class="language-markdown">| Header 1 | Header 2 | Header 3 |
+|----------|----------|----------|
+| Cell 1   | Cell 2   | Cell 3   |
+| Cell 4   | Cell 5   | Cell 6   |
+</code></pre>
+<h3>Aligned Tables</h3>
+<p>Align table content:</p>
+<pre><code class="language-markdown">| Left Aligned | Center Aligned | Right Aligned |
+|:-------------|:--------------:|--------------:|
+| Content      | Content        | Content       |
+| More content | More content   | More content  |
+</code></pre>
+<h3>Complex Tables</h3>
+<p>Tables with various content:</p>
+<pre><code class="language-markdown">| Feature | Description | Status | Priority |
+|---------|-------------|--------|----------|
+| Markdown Support | Full markdown-it features | ✅ | High |
+| Syntax Highlighting | Code blocks with colors | ✅ | High |
+| Responsive Design | Mobile-friendly layout | ✅ | Medium |
+| Custom Themes | Multiple color schemes | 🚧 | Low |
+</code></pre>
+<h2>💬 Blockquotes</h2>
+<h3>Basic Blockquotes</h3>
+<p>Quote text or highlight important information:</p>
+<pre><code class="language-markdown"><span class="hljs-quote">&gt; This is a blockquote.</span>
+<span class="hljs-quote">&gt; It can span multiple lines.</span>
+
+<span class="hljs-quote">&gt; This is another blockquote with a single line.</span>
+</code></pre>
+<h3>Nested Blockquotes</h3>
+<p>Create nested quote structures:</p>
+<pre><code class="language-markdown"><span class="hljs-quote">&gt; Main quote</span>
+<span class="hljs-quote">&gt; &gt; Nested quote</span>
+<span class="hljs-quote">&gt; &gt; &gt; Deeply nested quote</span>
+</code></pre>
+<h3>Blockquotes with Attribution</h3>
+<p>Add attribution to quotes:</p>
+<pre><code class="language-markdown"><span class="hljs-quote">&gt; The best way to predict the future is to invent it.</span>
+<span class="hljs-quote">&gt; 
+&gt; — Alan Kay</span>
+</code></pre>
+<h2>📏 Horizontal Rules</h2>
+<p>Create visual separators:</p>
+<pre><code class="language-markdown">---
+
+Above the rule
+
+---
+
+Below the rule
+</code></pre>
+<p>Alternative syntax:</p>
+<pre><code class="language-markdown"><span class="hljs-strong">***
+___
+</span></code></pre>
+<h2>🔧 Advanced markdown-it Features</h2>
+<h3>Definition Lists</h3>
+<p>Create definition lists:</p>
+<pre><code class="language-markdown">Term 1
+: Definition 1
+
+Term 2
+: Definition 2
+: Another definition for term 2
+</code></pre>
+<h3>Abbreviations</h3>
+<p>Define abbreviations:</p>
+<pre><code class="language-markdown"><span class="hljs-emphasis">*[HTML]: HyperText Markup Language
+*</span>[CSS]: Cascading Style Sheets
+
+The HTML and CSS are used for web development.
+</code></pre>
+<h3>Footnotes</h3>
+<p>Add footnotes to your content:</p>
+<pre><code class="language-markdown">Here&#x27;s a sentence with a footnote[^1].
+
+[<span class="hljs-symbol">^1</span>]: <span class="hljs-link">This is the footnote content.</span>
+</code></pre>
+<h3>Strikethrough</h3>
+<p><s>Strike through text</s>:</p>
+<pre><code class="language-markdown">~~This text is strikethrough~~
+</code></pre>
+<h3>Subscript and Superscript</h3>
+<p>Add subscript and superscript:</p>
+<pre><code class="language-markdown">H~2~O is water.
+X^2^ is X squared.
+</code></pre>
+<h3>Mark</h3>
+<p>==Highlight important text==:</p>
+<pre><code class="language-markdown">==This text is highlighted==
+</code></pre>
+<h3>Insert</h3>
+<p>++Insert new text++:</p>
+<pre><code class="language-markdown">++This text is inserted++
+</code></pre>
+<h2>🎨 Styling Features</h2>
+<h3>Custom CSS Classes</h3>
+<p>Add custom CSS classes (if supported by your theme):</p>
+<pre><code class="language-markdown">{.my-custom-class}
+This paragraph has a custom CSS class.
+</code></pre>
+<h3>HTML Integration</h3>
+<p>Use raw HTML when needed:</p>
+<pre><code class="language-markdown"><span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;alert alert-info&quot;</span>&gt;</span></span>
+  This is an info alert using HTML.
+<span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">details</span>&gt;</span></span>
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">summary</span>&gt;</span></span>Click to expand<span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">summary</span>&gt;</span></span>
+  This content is hidden by default.
+<span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">details</span>&gt;</span></span>
+</code></pre>
+<h2>📱 Responsive Elements</h2>
+<h3>Responsive Images</h3>
+<p>Images automatically scale on mobile devices:</p>
+<pre><code class="language-markdown">![<span class="hljs-string">Responsive Image</span>](<span class="hljs-link">https://example.com/image.png</span>)
+</code></pre>
+<h3>Responsive Tables</h3>
+<p>Tables automatically become scrollable on mobile:</p>
+<pre><code class="language-markdown">| Wide Table | With Many | Columns | That | Might | Overflow |
+|------------|-----------|---------|------|-------|----------|
+| Content    | Content   | Content | Content | Content | Content |
+</code></pre>
+<h2>🔍 Best Practices</h2>
+<h3>Accessibility</h3>
+<ul>
+<li><strong>Alt Text</strong>: Always provide meaningful alt text for images</li>
+<li><strong>Link Text</strong>: Use descriptive link text instead of “click here”</li>
+<li><strong>Headers</strong>: Use proper heading hierarchy (H1 → H2 → H3)</li>
+</ul>
+<h3>Performance</h3>
+<ul>
+<li><strong>Image Optimization</strong>: Use optimized images for faster loading</li>
+<li><strong>Code Blocks</strong>: Specify language for better syntax highlighting</li>
+<li><strong>Links</strong>: Use relative links for internal documentation</li>
+</ul>
+<h3>Readability</h3>
+<ul>
+<li><strong>Line Length</strong>: Keep lines under 80 characters for code blocks</li>
+<li><strong>Spacing</strong>: Use blank lines to separate sections</li>
+<li><strong>Consistency</strong>: Use consistent formatting throughout</li>
+</ul>
+<h2>🎯 Component Examples</h2>
+<h3>Complete Example</h3>
+<p>Here’s a complete example combining multiple components:</p>
+<pre><code class="language-markdown"><span class="hljs-section"># API Documentation</span>
+
+<span class="hljs-section">## Authentication</span>
+
+<span class="hljs-quote">&gt; <span class="hljs-strong">**Note**</span>: All API requests require authentication.</span>
+
+<span class="hljs-section">### Getting Started</span>
+
+<span class="hljs-bullet">1.</span> <span class="hljs-strong">**Install the SDK**</span>:
+   <span class="hljs-code">```bash
+   npm install my-api-sdk
+</span></code></pre>
+<ol start="2">
+<li>
+<p><strong>Initialize the client</strong>:</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">APIClient</span>({
+  <span class="hljs-attr">apiKey</span>: <span class="hljs-string">&#x27;your-api-key&#x27;</span>
+});
+</code></pre>
+</li>
+<li>
+<p><strong>Make your first request</strong>:</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/users&#x27;</span>);
+</code></pre>
+</li>
+</ol>
+<h3>Response Format</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>User ID</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>User name</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>string</td>
+<td>User email</td>
+</tr>
+</tbody>
+</table>
+<h3>Error Handling</h3>
+<pre><code class="language-javascript"><span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/users/123&#x27;</span>);
+} <span class="hljs-keyword">catch</span> (error) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Error:&#x27;</span>, error.<span class="hljs-property">message</span>);
+}
+</code></pre>
+<hr>
+<p>For more information, see the <a href="./api-reference.html">full API reference</a>.</p>
+<pre><code>
+This comprehensive guide covers all the markdown components and features available in Redocs. Use these elements to create rich, well-structured documentation! </code></pre>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Theme Switcher
+    const lightThemeBtn = document.getElementById('light-theme');
+    const darkThemeBtn = document.getElementById('dark-theme');
+    
+    // Load saved theme from localStorage
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateActiveButton(savedTheme);
+    
+    // Theme switching functions
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      updateActiveButton(theme);
+    }
+    
+    function updateActiveButton(theme) {
+      if (theme === 'light') {
+        lightThemeBtn.classList.add('active');
+        darkThemeBtn.classList.remove('active');
+      } else {
+        darkThemeBtn.classList.add('active');
+        lightThemeBtn.classList.remove('active');
+      }
+    }
+    
+    // Event listeners
+    lightThemeBtn.addEventListener('click', () => setTheme('light'));
+    darkThemeBtn.addEventListener('click', () => setTheme('dark'));
+  </script>
+</body>
+</html>
+ 

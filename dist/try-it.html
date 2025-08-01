@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %> - <%= siteTitle %></title>
+  <title>try-it - Redocs Documentation</title>
   <style>
     /* Theme Variables */
     :root {
@@ -341,18 +341,202 @@
   <div class="container">
     <nav class="sidebar">
       <div class="sidebar-header">
-        <h1><%= siteTitle %></h1>
+        <h1>Redocs Documentation</h1>
       </div>
       <ul class="nav-menu">
-        <% navigation.forEach(function(item) { %>
-          <li><a href="<%= item.href %>" class="<%= title === item.title ? 'active' : '' %>"><%= item.displayName %></a></li>
-        <% }); %>
+        
+          <li><a href="getting-started.html" class="">Getting Started</a></li>
+        
+          <li><a href="features.html" class="">Features</a></li>
+        
+          <li><a href="components.html" class="">Components</a></li>
+        
+          <li><a href="example.html" class="">Examples</a></li>
+        
+          <li><a href="try-it.html" class="active">Try It</a></li>
+        
+          <li><a href="support.html" class="">Support</a></li>
+        
       </ul>
     </nav>
 
     <main class="main-content">
       <div class="content">
-        <%- content %>
+        <h1>Try It Yourself</h1>
+<blockquote>
+<p><strong>Note</strong>: To try this locally, you need to fork and clone the repository first:</p>
+<pre><code class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/yourusername/redocs.git
+<span class="hljs-built_in">cd</span> redocs
+npm install
+npm run build
+npm run serve
+</code></pre>
+</blockquote>
+<h2>🎯 Online Markdown Editors &amp; Preview Sites</h2>
+<p>Before writing locally, try these online tools to learn markdown:</p>
+<ul>
+<li><strong><a href="https://stackedit.io/">StackEdit</a></strong> - Full-featured online markdown editor</li>
+<li><strong><a href="https://dillinger.io/">Dillinger</a></strong> - Simple markdown editor with live preview</li>
+<li><strong><a href="https://markdownlivepreview.com/">Markdown Live Preview</a></strong> - Real-time preview</li>
+<li><strong><a href="https://hackmd.io/">HackMD</a></strong> - Collaborative markdown editor</li>
+<li><strong><a href="https://www.markdownguide.org/tools/">Markdown Guide</a></strong> - More tools and resources</li>
+</ul>
+<h2>📝 Your Markdown Playground</h2>
+<p>Write your markdown content below this line:</p>
+<hr>
+<!-- 
+  ========================================
+  START WRITING YOUR MARKDOWN BELOW
+  ========================================
+-->
+<h1>Your Title Here</h1>
+<p>Write your content here…</p>
+<!-- 
+  ========================================
+  MARKDOWN COMPONENTS EXAMPLES & COMMENTS
+  ========================================
+-->
+<!-- 
+  HEADERS:
+  # H1 Header
+  ## H2 Header  
+  ### H3 Header
+  #### H4 Header
+  ##### H5 Header
+  ###### H6 Header
+-->
+<!-- 
+  EMPHASIS:
+  **bold text**
+  *italic text*
+  ***bold and italic***
+  `inline code`
+  ~~strikethrough~~
+-->
+<!-- 
+  LISTS:
+  - Unordered item
+  - Another item
+    - Nested item
+  
+  1. Ordered item
+  2. Another item
+     1. Nested numbered item
+  
+  - [x] Completed task
+  - [ ] Pending task
+-->
+<!-- 
+  LINKS:
+  [Link text](https://example.com)
+  [Internal link](./other-page.html)
+  
+  Reference links:
+  [Link text][reference]
+  [reference]: https://example.com
+-->
+<!-- 
+  IMAGES:
+  ![Alt text](https://example.com/image.png)
+  ![Local image](./images/screenshot.png)
+-->
+<!-- 
+  CODE BLOCKS:
+  ```javascript
+  function example() {
+    return "Hello World";
+  }
+  ```
+  
+  ```python
+  def greet(name):
+      return f"Hello, {name}!"
+  ```
+  
+  ```bash
+  npm install
+  npm run build
+  ```
+-->
+<!-- 
+  TABLES:
+  | Header 1 | Header 2 | Header 3 |
+  |----------|----------|----------|
+  | Cell 1   | Cell 2   | Cell 3   |
+  | Cell 4   | Cell 5   | Cell 6   |
+-->
+<!-- 
+  BLOCKQUOTES:
+  > This is a blockquote
+  > 
+  > It can span multiple lines
+  > 
+  > > Nested blockquotes work too
+-->
+<!-- 
+  HORIZONTAL RULES:
+  ---
+  ***
+  ___
+-->
+<!-- 
+  ADVANCED FEATURES:
+  
+  Definition Lists:
+  Term 1
+  : Definition 1
+  
+  Abbreviations:
+  *[HTML]: HyperText Markup Language
+  
+  Footnotes:
+  Here's a footnote[^1].
+  [^1]: Footnote content
+  
+  Subscript/Superscript:
+  H~2~O is water
+  X^2^ is X squared
+  
+  Highlighted Text:
+  ==This text is highlighted==
+  
+  Inserted Text:
+  ++This text is inserted++
+-->
+<!-- 
+  HTML INTEGRATION:
+  <div class="alert alert-info">
+    <strong>Info:</strong> Custom HTML elements
+  </div>
+  
+  <details>
+    <summary>Click to expand</summary>
+    <p>Hidden content</p>
+  </details>
+-->
+<!-- 
+  ========================================
+  END OF EXAMPLES
+  ========================================
+-->
+<hr>
+<h2>🚀 Tips for Writing</h2>
+<ol>
+<li><strong>Start Simple</strong>: Begin with basic headers and paragraphs</li>
+<li><strong>Use Preview</strong>: Check your changes with <code>npm run serve</code></li>
+<li><strong>Experiment</strong>: Try different components and see how they render</li>
+<li><strong>Reference</strong>: Use the <a href="./components.html">Components</a> page for syntax</li>
+<li><strong>Practice</strong>: The more you write, the better you’ll get!</li>
+</ol>
+<h2>📚 Learning Resources</h2>
+<ul>
+<li><strong><a href="https://www.markdownguide.org/">Markdown Guide</a></strong> - Complete markdown tutorial</li>
+<li><strong><a href="https://docs.github.com/en/github/writing-on-github">GitHub Markdown</a></strong> - GitHub’s markdown guide</li>
+<li><strong><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">Markdown Cheatsheet</a></strong> - Quick reference</li>
+</ul>
+<hr>
+<p><em>Happy writing! 🎉</em></p>
+
       </div>
     </main>
   </div>

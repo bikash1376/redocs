@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %> - <%= siteTitle %></title>
+  <title>getting-started - Redocs Documentation</title>
   <style>
     /* Theme Variables */
     :root {
@@ -341,18 +341,187 @@
   <div class="container">
     <nav class="sidebar">
       <div class="sidebar-header">
-        <h1><%= siteTitle %></h1>
+        <h1>Redocs Documentation</h1>
       </div>
       <ul class="nav-menu">
-        <% navigation.forEach(function(item) { %>
-          <li><a href="<%= item.href %>" class="<%= title === item.title ? 'active' : '' %>"><%= item.displayName %></a></li>
-        <% }); %>
+        
+          <li><a href="getting-started.html" class="active">Getting Started</a></li>
+        
+          <li><a href="features.html" class="">Features</a></li>
+        
+          <li><a href="components.html" class="">Components</a></li>
+        
+          <li><a href="example.html" class="">Examples</a></li>
+        
+          <li><a href="try-it.html" class="">Try It</a></li>
+        
+          <li><a href="support.html" class="">Support</a></li>
+        
       </ul>
     </nav>
 
     <main class="main-content">
       <div class="content">
-        <%- content %>
+        <h1>Getting Started with Redocs</h1>
+<p>Welcome to <strong>Redocs</strong> - a modern, lightweight documentation site generator that transforms your Markdown files into beautiful, responsive documentation websites.</p>
+<h2>What is Redocs?</h2>
+<p>Redocs is a Node.js-based documentation generator that:</p>
+<ul>
+<li><strong>Converts Markdown to HTML</strong> using the powerful markdown-it parser</li>
+<li><strong>Provides modern styling</strong> with a clean, professional design</li>
+<li><strong>Offers dynamic navigation</strong> that automatically updates based on your content</li>
+<li><strong>Supports syntax highlighting</strong> for code blocks</li>
+<li><strong>Is fully responsive</strong> and works on all devices</li>
+<li><strong>Requires minimal configuration</strong> to get started</li>
+</ul>
+<p>Perfect for:</p>
+<ul>
+<li>📚 Project documentation</li>
+<li>🎯 API documentation</li>
+<li>📖 Technical guides</li>
+<li>🏢 Company wikis</li>
+<li>📝 Knowledge bases</li>
+</ul>
+<h2>Quick Installation</h2>
+<h3>Prerequisites</h3>
+<ul>
+<li><strong>Node.js</strong> (version 14 or higher)</li>
+<li><strong>npm</strong> (comes with Node.js)</li>
+</ul>
+<h3>Clone the Repository</h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Clone the repository</span>
+git <span class="hljs-built_in">clone</span> https://github.com/yourusername/redocs.git
+
+<span class="hljs-comment"># Navigate to the project directory</span>
+<span class="hljs-built_in">cd</span> redocs
+
+<span class="hljs-comment"># Install dependencies</span>
+npm install
+</code></pre>
+<h3>First Build</h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Generate your documentation</span>
+npm run build
+
+<span class="hljs-comment"># Serve locally to preview</span>
+npm run serve
+</code></pre>
+<p>Your documentation will be available at <code>http://localhost:3000</code></p>
+<h2>Project Structure</h2>
+<pre><code>redocs/
+├── docs/                    # 📁 Your markdown documentation files
+│   ├── getting-started.md   # This file
+│   ├── features.md          # Features overview
+│   ├── components.md        # Available markdown components
+│   ├── support.md           # Support and contact information
+│   ├── intro.md             # Introduction page
+│   ├── test.md              # Test page
+│   ├── help.md              # Help guide
+│   └── example.md           # Examples showcase
+├── templates/               # 📁 HTML templates
+│   └── layout.html          # Main layout template with CSS
+├── dist/                    # 📁 Generated HTML files (auto-created)
+├── src/                     # 📁 Build scripts
+│   └── index.js             # Main build script
+├── docs-config.json         # ⚙️ Navigation and site configuration
+├── package.json             # 📦 Project dependencies and scripts
+└── README.md                # 📖 Project overview
+</code></pre>
+<h2>Key Files Explained</h2>
+<h3><code>docs/</code> Directory</h3>
+<p>This is where you write your documentation in Markdown format. Each <code>.md</code> file becomes a page in your documentation site.</p>
+<h3><code>templates/layout.html</code></h3>
+<p>The main HTML template that wraps all your content. Contains:</p>
+<ul>
+<li><strong>CSS styling</strong> for the entire site</li>
+<li><strong>Navigation sidebar</strong> structure</li>
+<li><strong>Responsive design</strong> rules</li>
+<li><strong>Typography</strong> and component styles</li>
+</ul>
+<h3><code>src/index.js</code></h3>
+<p>The build script that:</p>
+<ul>
+<li><strong>Scans</strong> the <code>docs/</code> folder for Markdown files</li>
+<li><strong>Converts</strong> Markdown to HTML using markdown-it</li>
+<li><strong>Applies</strong> the layout template</li>
+<li><strong>Generates</strong> the final HTML files in <code>dist/</code></li>
+</ul>
+<h3><code>docs-config.json</code></h3>
+<p>Configuration file for:</p>
+<ul>
+<li><strong>Navigation display names</strong> and ordering</li>
+<li><strong>Site title</strong> and metadata</li>
+<li><strong>Custom settings</strong> for your documentation</li>
+</ul>
+<h2>Adding Your First Page</h2>
+<ol>
+<li>
+<p><strong>Create a new file</strong> in the <code>docs/</code> folder:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">touch</span> docs/my-page.md
+</code></pre>
+</li>
+<li>
+<p><strong>Write your content</strong> in Markdown:</p>
+<pre><code class="language-markdown"><span class="hljs-section"># My New Page</span>
+
+This is my first documentation page!
+
+<span class="hljs-section">## Features</span>
+
+<span class="hljs-bullet">-</span> Feature 1
+<span class="hljs-bullet">-</span> Feature 2
+</code></pre>
+</li>
+<li>
+<p><strong>Build the site</strong>:</p>
+<pre><code class="language-bash">npm run build
+</code></pre>
+</li>
+<li>
+<p><strong>View your page</strong> at <code>http://localhost:3000/my-page.html</code></p>
+</li>
+</ol>
+<h2>Customization</h2>
+<h3>Changing the Site Title</h3>
+<p>Edit <code>docs-config.json</code>:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;site&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;My Awesome Documentation&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h3>Customizing Navigation</h3>
+<p>Update the navigation in <code>docs-config.json</code>:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;navigation&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;getting-started&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;displayName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Quick Start&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;order&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h3>Modifying Styles</h3>
+<p>Edit the CSS in <code>templates/layout.html</code> to change colors, fonts, and layout.</p>
+<h2>Next Steps</h2>
+<ul>
+<li>📖 Read the <a href="./features.html">Features</a> page to learn about all capabilities</li>
+<li>🧩 Check out <a href="./components.html">Components</a> to see available markdown elements</li>
+<li>🆘 Visit <a href="./support.html">Support</a> if you need help</li>
+<li>🎨 Explore the <a href="./example.html">Examples</a> to see what’s possible</li>
+</ul>
+<h2>Deployment</h2>
+<p>Your generated documentation in the <code>dist/</code> folder can be deployed to any static hosting service:</p>
+<ul>
+<li><strong>GitHub Pages</strong></li>
+<li><strong>Netlify</strong></li>
+<li><strong>Vercel</strong></li>
+<li><strong>AWS S3</strong></li>
+<li><strong>Any web server</strong></li>
+</ul>
+<p>The <code>dist/</code> folder contains everything needed to serve your documentation site.</p>
+<hr>
+<p>Ready to start building your documentation? Check out the <a href="./features.html">Features</a> page to learn more about what Redocs can do!</p>
+
       </div>
     </main>
   </div>

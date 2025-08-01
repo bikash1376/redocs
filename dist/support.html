@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %> - <%= siteTitle %></title>
+  <title>support - Redocs Documentation</title>
   <style>
     /* Theme Variables */
     :root {
@@ -341,18 +341,200 @@
   <div class="container">
     <nav class="sidebar">
       <div class="sidebar-header">
-        <h1><%= siteTitle %></h1>
+        <h1>Redocs Documentation</h1>
       </div>
       <ul class="nav-menu">
-        <% navigation.forEach(function(item) { %>
-          <li><a href="<%= item.href %>" class="<%= title === item.title ? 'active' : '' %>"><%= item.displayName %></a></li>
-        <% }); %>
+        
+          <li><a href="getting-started.html" class="">Getting Started</a></li>
+        
+          <li><a href="features.html" class="">Features</a></li>
+        
+          <li><a href="components.html" class="">Components</a></li>
+        
+          <li><a href="example.html" class="">Examples</a></li>
+        
+          <li><a href="try-it.html" class="">Try It</a></li>
+        
+          <li><a href="support.html" class="active">Support</a></li>
+        
       </ul>
     </nav>
 
     <main class="main-content">
       <div class="content">
-        <%- content %>
+        <h1>Support &amp; Contact</h1>
+<p>Need help with Redocs? We’re here to support you! Here are the best ways to get in touch and find the help you need.</p>
+<h2>🆘 Getting Help</h2>
+<h3>Documentation</h3>
+<ul>
+<li><strong>Start here</strong> - Check the <a href="./getting-started.html">Getting Started</a> guide</li>
+<li><strong>Features</strong> - Explore all <a href="./features.html">Features &amp; Capabilities</a></li>
+<li><strong>Components</strong> - Learn about <a href="./components.html">Markdown Components</a></li>
+<li><strong>Examples</strong> - See <a href="./example.html">Examples</a> in action</li>
+</ul>
+<h3>Common Issues</h3>
+<h4>Build Problems</h4>
+<pre><code class="language-bash"><span class="hljs-comment"># Make sure you&#x27;re in the right directory</span>
+<span class="hljs-built_in">cd</span> redocs
+
+<span class="hljs-comment"># Install dependencies</span>
+npm install
+
+<span class="hljs-comment"># Try building again</span>
+npm run build
+</code></pre>
+<h4>Navigation Issues</h4>
+<ul>
+<li>Check that your markdown files are in the <code>docs/</code> folder</li>
+<li>Ensure files have <code>.md</code> extension</li>
+<li>Verify <code>docs-config.json</code> syntax is valid JSON</li>
+</ul>
+<h4>Styling Problems</h4>
+<ul>
+<li>Edit CSS in <code>templates/layout.html</code></li>
+<li>Check browser console for errors</li>
+<li>Ensure all dependencies are installed</li>
+</ul>
+<h2>👨‍💻 Developer &amp; Creator</h2>
+<h3>Bikash - Project Creator</h3>
+<p><strong>Redocs</strong> was created by <strong>Bikash</strong>, a passionate developer dedicated to making documentation creation simple and beautiful.</p>
+<h3>Connect with Bikash</h3>
+<h4>🌐 Social Media</h4>
+<ul>
+<li><strong><a href="https://x.com/bikash1376">X (Twitter)</a></strong> - Follow for updates and tech insights</li>
+<li><strong><a href="https://github.com/bikash1376">GitHub</a></strong> - View projects and contributions</li>
+</ul>
+<h4>🎯 Portfolio</h4>
+<ul>
+<li><strong><a href="https://bksh.site">Personal Website</a></strong> - Portfolio and professional information</li>
+</ul>
+<h3>Contact Information</h3>
+<ul>
+<li><strong>X (Twitter)</strong>: <a href="https://x.com/bikash1376">@bikash1376</a></li>
+<li><strong>GitHub</strong>: <a href="https://github.com/bikash1376">github.com/bikash1376</a></li>
+<li><strong>Portfolio</strong>: <a href="https://bksh.site">bksh.site</a></li>
+</ul>
+<h2>🐛 Reporting Issues</h2>
+<h3>Before Reporting</h3>
+<ol>
+<li><strong>Check existing issues</strong> - Your problem might already be reported</li>
+<li><strong>Search documentation</strong> - The answer might be in the docs</li>
+<li><strong>Try the latest version</strong> - Update to the newest release</li>
+</ol>
+<h3>How to Report</h3>
+<p>When reporting an issue, please include:</p>
+<ul>
+<li><strong>Description</strong> - What you’re trying to do</li>
+<li><strong>Expected behavior</strong> - What should happen</li>
+<li><strong>Actual behavior</strong> - What actually happens</li>
+<li><strong>Steps to reproduce</strong> - How to recreate the issue</li>
+<li><strong>Environment</strong> - OS, Node.js version, etc.</li>
+<li><strong>Screenshots</strong> - If applicable</li>
+</ul>
+<h3>Issue Templates</h3>
+<p>Use these templates when reporting:</p>
+<h4>Bug Report</h4>
+<pre><code>**Bug Description:**
+[Describe the bug]
+
+**Steps to Reproduce:**
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+
+**Expected Behavior:**
+[What should happen]
+
+**Actual Behavior:**
+[What actually happens]
+
+**Environment:**
+- OS: [Windows/Mac/Linux]
+- Node.js: [version]
+- Redocs: [version]
+
+**Additional Information:**
+[Screenshots, logs, etc.]
+</code></pre>
+<h4>Feature Request</h4>
+<pre><code>**Feature Description:**
+[Describe the feature you'd like]
+
+**Use Case:**
+[Why is this feature needed?]
+
+**Proposed Solution:**
+[How should it work?]
+
+**Additional Information:**
+[Any other relevant details]
+</code></pre>
+<h2>🤝 Contributing</h2>
+<p>Want to help improve Redocs? We welcome contributions!</p>
+<h3>Ways to Contribute</h3>
+<ul>
+<li><strong>Report bugs</strong> - Help us find and fix issues</li>
+<li><strong>Request features</strong> - Suggest improvements</li>
+<li><strong>Improve documentation</strong> - Make docs better</li>
+<li><strong>Submit code</strong> - Fix bugs or add features</li>
+<li><strong>Share feedback</strong> - Tell us what you think</li>
+</ul>
+<h3>Development Setup</h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Fork and clone the repository</span>
+git <span class="hljs-built_in">clone</span> https://github.com/yourusername/redocs.git
+<span class="hljs-built_in">cd</span> redocs
+
+<span class="hljs-comment"># Install dependencies</span>
+npm install
+
+<span class="hljs-comment"># Make your changes</span>
+<span class="hljs-comment"># Test your changes</span>
+npm run build
+npm run serve
+
+<span class="hljs-comment"># Submit a pull request</span>
+</code></pre>
+<p>See the <a href="./features.html">Features</a> page for detailed contribution guidelines.</p>
+<h2>📚 Additional Resources</h2>
+<h3>Learning Resources</h3>
+<ul>
+<li><strong><a href="https://www.markdownguide.org/">Markdown Guide</a></strong> - Learn Markdown syntax</li>
+<li><strong><a href="https://github.com/markdown-it/markdown-it">markdown-it Documentation</a></strong> - Advanced features</li>
+<li><strong><a href="https://nodejs.org/docs/">Node.js Documentation</a></strong> - Node.js basics</li>
+</ul>
+<h3>Related Tools</h3>
+<ul>
+<li><strong><a href="https://pages.github.com/">GitHub Pages</a></strong> - Host your docs for free</li>
+<li><strong><a href="https://www.netlify.com/">Netlify</a></strong> - Easy deployment</li>
+<li><strong><a href="https://vercel.com/">Vercel</a></strong> - Fast global deployment</li>
+</ul>
+<h3>Community</h3>
+<ul>
+<li><strong>GitHub Discussions</strong> - Ask questions and share ideas</li>
+<li><strong>GitHub Issues</strong> - Report bugs and request features</li>
+<li><strong>Social Media</strong> - Follow for updates and tips</li>
+</ul>
+<h2>🎯 Quick Support Checklist</h2>
+<p>Before reaching out for support, try these steps:</p>
+<ul>
+<li>[ ] <strong>Read the documentation</strong> - Check getting started and features pages</li>
+<li>[ ] <strong>Search existing issues</strong> - Your problem might already be solved</li>
+<li>[ ] <strong>Update to latest version</strong> - Try the newest release</li>
+<li>[ ] <strong>Check your setup</strong> - Verify Node.js version and dependencies</li>
+<li>[ ] <strong>Test with minimal setup</strong> - Try with just the basic files</li>
+<li>[ ] <strong>Check browser console</strong> - Look for JavaScript errors</li>
+<li>[ ] <strong>Verify file permissions</strong> - Ensure files are readable</li>
+</ul>
+<h2>📞 Direct Contact</h2>
+<p>For urgent issues or private matters, you can reach out directly:</p>
+<ul>
+<li><strong>X (Twitter)</strong>: <a href="https://x.com/bikash1376">@bikash1376</a> - Quick questions and updates</li>
+<li><strong>GitHub</strong>: <a href="https://github.com/bikash1376">github.com/bikash1376</a> - Technical discussions</li>
+<li><strong>Portfolio</strong>: <a href="https://bksh.site">bksh.site</a> - Professional inquiries</li>
+</ul>
+<hr>
+<p>Thank you for using Redocs! We’re committed to making your documentation experience as smooth as possible. 🚀</p>
+
       </div>
     </main>
   </div>

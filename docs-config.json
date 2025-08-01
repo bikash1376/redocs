@@ -1,24 +1,44 @@
 {
   "navigation": {
-    "intro": {
-      "displayName": "Introduction",
+    "getting-started": {
+      "displayName": "Getting Started",
       "order": 1
     },
-    "test": {
-      "displayName": "Test",
+    "intro": {
+      "displayName": "Introduction",
       "order": 2
     },
-    "help": {
-      "displayName": "Help Guide",
+    "features": {
+      "displayName": "Features",
       "order": 3
+    },
+    "components": {
+      "displayName": "Components",
+      "order": 4
     },
     "example": {
       "displayName": "Examples",
-      "order": 4
+      "order": 5
+    },
+    "try-it": {
+      "displayName": "Try It",
+      "order": 6
+    },
+    "test": {
+      "displayName": "Test",
+      "order": 7
+    },
+    "help": {
+      "displayName": "Help",
+      "order": 8
+    },
+    "support": {
+      "displayName": "Support",
+      "order": 9
     }
   },
   "site": {
-    "title": "Documentation",
-    "description": "A simple and elegant documentation site"
+    "title": "Redocs Documentation",
+    "description": "A modern, lightweight documentation site generator"
   }
 } 

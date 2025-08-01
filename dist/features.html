@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>features - Redocs Documentation</title>
+  <style>
+    /* Theme Variables */
+    :root {
+      --bg-primary: #f8f9fa;
+      --bg-secondary: #fff;
+      --text-primary: #333;
+      --text-secondary: #586069;
+      --border-color: #e1e4e8;
+      --accent-color: #0366d6;
+      --accent-hover: #024ea4;
+      --code-bg: #f6f8fa;
+      --sidebar-bg: #fff;
+      --nav-hover: #f6f8fa;
+      --nav-active: #0366d6;
+      --nav-active-text: white;
+    }
+
+    /* Dark Theme */
+    [data-theme="dark"] {
+      --bg-primary: #0d1117;
+      --bg-secondary: #161b22;
+      --text-primary: #c9d1d9;
+      --text-secondary: #8b949e;
+      --border-color: #30363d;
+      --accent-color: #58a6ff;
+      --accent-hover: #79c0ff;
+      --code-bg: #21262d;
+      --sidebar-bg: #161b22;
+      --nav-hover: #21262d;
+      --nav-active: #58a6ff;
+      --nav-active-text: #0d1117;
+    }
+
+    /* Theme Switcher */
+    .theme-switcher {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .theme-switcher button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 4px;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .theme-switcher button:hover {
+      background: var(--nav-hover);
+      color: var(--text-primary);
+    }
+
+    .theme-switcher button.active {
+      background: var(--accent-color);
+      color: var(--nav-active-text);
+    }
+
+    .theme-switcher .icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background-color: var(--bg-primary);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 280px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-color);
+      padding: 2rem 0;
+      position: fixed;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      padding: 0 2rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-header h1 {
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 0 1rem;
+    }
+
+    .nav-menu li {
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-menu a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-menu a:hover {
+      background-color: var(--nav-hover);
+      color: var(--text-primary);
+    }
+
+    .nav-menu a.active {
+      background-color: var(--nav-active);
+      color: var(--nav-active-text);
+    }
+
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 2rem;
+      background: var(--bg-secondary);
+      min-height: 100vh;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 2rem 0 1rem;
+      padding-top: 1rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    h4, h5, h6 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 1rem 0 0.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    /* Links */
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
+
+    /* Lists */
+    ul, ol {
+      margin: 1rem 0;
+      padding-left: 2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Code blocks */
+    pre {
+      background-color: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    code {
+      background-color: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 3px;
+      padding: 0.2rem 0.4rem;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 0.9em;
+    }
+
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    /* Blockquotes */
+    blockquote {
+      border-left: 4px solid var(--accent-color);
+      padding-left: 1rem;
+      margin: 1rem 0;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    th {
+      background-color: var(--code-bg);
+      font-weight: 600;
+    }
+
+    /* Images */
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      margin: 1rem 0;
+    }
+
+    /* Horizontal rule */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: 2rem 0;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+
+      .content {
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Syntax highlighting colors */
+    .hljs-keyword { color: #d73a49; }
+    .hljs-string { color: #032f62; }
+    .hljs-comment { color: #6a737d; }
+    .hljs-function { color: #6f42c1; }
+    .hljs-number { color: #005cc5; }
+  </style>
+</head>
+<body>
+  <!-- Theme Switcher -->
+  <div class="theme-switcher">
+    <button id="light-theme" class="active" title="Light Theme">
+      <span class="icon">☀️</span>
+    </button>
+    <button id="dark-theme" title="Dark Theme">
+      <span class="icon">🌙</span>
+    </button>
+  </div>
+
+  <div class="container">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+        <h1>Redocs Documentation</h1>
+      </div>
+      <ul class="nav-menu">
+        
+          <li><a href="getting-started.html" class="">Getting Started</a></li>
+        
+          <li><a href="features.html" class="active">Features</a></li>
+        
+          <li><a href="components.html" class="">Components</a></li>
+        
+          <li><a href="example.html" class="">Examples</a></li>
+        
+          <li><a href="try-it.html" class="">Try It</a></li>
+        
+          <li><a href="support.html" class="">Support</a></li>
+        
+      </ul>
+    </nav>
+
+    <main class="main-content">
+      <div class="content">
+        <h1>Features &amp; Capabilities</h1>
+<p>Redocs comes packed with powerful features designed to make documentation creation simple, beautiful, and efficient.</p>
+<h2>🚀 Core Features</h2>
+<h3>Markdown Processing</h3>
+<ul>
+<li><strong>Full Markdown Support</strong> - Complete markdown-it compatibility</li>
+<li><strong>HTML Rendering</strong> - Convert markdown to clean, semantic HTML</li>
+<li><strong>Syntax Highlighting</strong> - Beautiful code blocks with language detection</li>
+<li><strong>Link Processing</strong> - Automatic internal and external link handling</li>
+<li><strong>Typography</strong> - Smart typography with proper spacing and hierarchy</li>
+</ul>
+<h3>Dynamic Navigation</h3>
+<ul>
+<li><strong>Auto-Generated Menu</strong> - Navigation updates automatically when you add/remove files</li>
+<li><strong>Custom Display Names</strong> - Configure friendly names for navigation links</li>
+<li><strong>Flexible Ordering</strong> - Control the order of pages in the navigation</li>
+<li><strong>Active Page Highlighting</strong> - Current page is clearly indicated</li>
+<li><strong>Responsive Navigation</strong> - Works perfectly on mobile and desktop</li>
+</ul>
+<h3>Modern Design</h3>
+<ul>
+<li><strong>Professional Styling</strong> - Clean, modern design inspired by popular documentation sites</li>
+<li><strong>Responsive Layout</strong> - Optimized for all screen sizes and devices</li>
+<li><strong>Typography System</strong> - Consistent, readable typography throughout</li>
+<li><strong>Color Scheme</strong> - GitHub-inspired colors for familiarity</li>
+<li><strong>Component Styling</strong> - Beautiful styling for all markdown elements</li>
+</ul>
+<h3>Build System</h3>
+<ul>
+<li><strong>Fast Processing</strong> - Quick build times even with large documentation</li>
+<li><strong>Error Handling</strong> - Graceful error handling with helpful messages</li>
+<li><strong>File Filtering</strong> - Only processes <code>.md</code> files automatically</li>
+<li><strong>Clean Output</strong> - Generates clean, optimized HTML files</li>
+<li><strong>Development Server</strong> - Built-in local development server</li>
+</ul>
+<h2>🎨 Styling Features</h2>
+<h3>Typography</h3>
+<ul>
+<li><strong>System Fonts</strong> - Uses native system fonts for optimal performance</li>
+<li><strong>Responsive Sizing</strong> - Font sizes adapt to screen size</li>
+<li><strong>Proper Hierarchy</strong> - Clear visual hierarchy with headings</li>
+<li><strong>Line Spacing</strong> - Optimal line height for readability</li>
+</ul>
+<h3>Code Blocks</h3>
+<ul>
+<li><strong>Syntax Highlighting</strong> - Language-specific color coding</li>
+<li><strong>Scrollable Content</strong> - Horizontal scrolling for long code lines</li>
+<li><strong>Monospace Fonts</strong> - Proper code font rendering</li>
+<li><strong>Border Styling</strong> - Subtle borders and background colors</li>
+</ul>
+<h3>Tables</h3>
+<ul>
+<li><strong>Responsive Tables</strong> - Tables adapt to mobile screens</li>
+<li><strong>Clean Styling</strong> - Professional table appearance</li>
+<li><strong>Header Highlighting</strong> - Clear distinction for table headers</li>
+<li><strong>Border System</strong> - Subtle borders for readability</li>
+</ul>
+<h3>Interactive Elements</h3>
+<ul>
+<li><strong>Hover Effects</strong> - Smooth transitions on interactive elements</li>
+<li><strong>Link Styling</strong> - Clear link appearance with hover states</li>
+<li><strong>Button Styling</strong> - Professional button appearance</li>
+<li><strong>Focus States</strong> - Accessible focus indicators</li>
+</ul>
+<h2>⚙️ Configuration Features</h2>
+<h3>Site Configuration</h3>
+<ul>
+<li><strong>Custom Site Title</strong> - Set your own site title</li>
+<li><strong>Meta Description</strong> - Configure site description</li>
+<li><strong>Navigation Customization</strong> - Full control over navigation</li>
+<li><strong>Page Ordering</strong> - Flexible page ordering system</li>
+</ul>
+<h3>Build Configuration</h3>
+<ul>
+<li><strong>Template Customization</strong> - Modify the HTML template</li>
+<li><strong>CSS Customization</strong> - Full control over styling</li>
+<li><strong>Output Directory</strong> - Configurable output location</li>
+<li><strong>File Processing</strong> - Customizable file processing rules</li>
+</ul>
+<h2>📱 Responsive Design</h2>
+<h3>Mobile Optimization</h3>
+<ul>
+<li><strong>Mobile-First Design</strong> - Optimized for mobile devices</li>
+<li><strong>Touch-Friendly</strong> - Large touch targets for mobile</li>
+<li><strong>Responsive Navigation</strong> - Collapsible navigation on mobile</li>
+<li><strong>Optimized Typography</strong> - Readable text on small screens</li>
+</ul>
+<h3>Desktop Experience</h3>
+<ul>
+<li><strong>Fixed Sidebar</strong> - Always-visible navigation on desktop</li>
+<li><strong>Optimal Reading Width</strong> - Comfortable reading experience</li>
+<li><strong>Hover Interactions</strong> - Rich hover effects on desktop</li>
+<li><strong>Large Screen Optimization</strong> - Efficient use of screen space</li>
+</ul>
+<h2>🔧 Technical Features</h2>
+<h3>Performance</h3>
+<ul>
+<li><strong>Static Generation</strong> - Fast loading static HTML files</li>
+<li><strong>Minimal Dependencies</strong> - Lightweight and fast</li>
+<li><strong>Optimized CSS</strong> - Efficient stylesheet delivery</li>
+<li><strong>No JavaScript Required</strong> - Works without client-side JavaScript</li>
+</ul>
+<h3>Accessibility</h3>
+<ul>
+<li><strong>Semantic HTML</strong> - Proper HTML structure for screen readers</li>
+<li><strong>Keyboard Navigation</strong> - Full keyboard accessibility</li>
+<li><strong>Color Contrast</strong> - WCAG compliant color contrast</li>
+<li><strong>Focus Management</strong> - Proper focus indicators</li>
+</ul>
+<h3>SEO Friendly</h3>
+<ul>
+<li><strong>Clean URLs</strong> - SEO-friendly file naming</li>
+<li><strong>Meta Tags</strong> - Proper meta tag generation</li>
+<li><strong>Semantic Structure</strong> - Proper heading hierarchy</li>
+<li><strong>Fast Loading</strong> - Optimized for search engine ranking</li>
+</ul>
+<h2>🛠️ Development Features</h2>
+<h3>Local Development</h3>
+<ul>
+<li><strong>Live Preview</strong> - Instant preview of changes</li>
+<li><strong>Hot Reloading</strong> - Automatic rebuild on file changes</li>
+<li><strong>Error Reporting</strong> - Clear error messages during development</li>
+<li><strong>Debug Information</strong> - Helpful debug output</li>
+</ul>
+<h3>Build Process</h3>
+<ul>
+<li><strong>Incremental Builds</strong> - Only rebuild changed files</li>
+<li><strong>Asset Optimization</strong> - Optimized asset delivery</li>
+<li><strong>Clean Output</strong> - Organized output structure</li>
+<li><strong>Build Logging</strong> - Detailed build process logging</li>
+</ul>
+<h2>🚀 Deployment Ready</h2>
+<h3>Static Hosting</h3>
+<ul>
+<li><strong>GitHub Pages</strong> - Perfect for GitHub-hosted documentation</li>
+<li><strong>Netlify</strong> - One-click deployment</li>
+<li><strong>Vercel</strong> - Fast global deployment</li>
+<li><strong>AWS S3</strong> - Scalable cloud hosting</li>
+</ul>
+<h3>Custom Domains</h3>
+<ul>
+<li><strong>Domain Support</strong> - Works with custom domains</li>
+<li><strong>HTTPS Ready</strong> - Secure by default</li>
+<li><strong>CDN Compatible</strong> - Works with content delivery networks</li>
+<li><strong>Caching Friendly</strong> - Optimized for caching</li>
+</ul>
+<hr>
+<h2>🤝 Contributing to Redocs</h2>
+<p>We welcome contributions from the community! Here’s how you can help improve Redocs.</p>
+<h3>How to Contribute</h3>
+<ol>
+<li>
+<p><strong>Fork the Repository</strong></p>
+<pre><code class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/yourusername/redocs.git
+<span class="hljs-built_in">cd</span> redocs
+</code></pre>
+</li>
+<li>
+<p><strong>Create a Feature Branch</strong></p>
+<pre><code class="language-bash">git checkout -b feature/your-feature-name
+</code></pre>
+</li>
+<li>
+<p><strong>Make Your Changes</strong></p>
+<ul>
+<li>Add new features</li>
+<li>Fix bugs</li>
+<li>Improve documentation</li>
+<li>Enhance styling</li>
+</ul>
+</li>
+<li>
+<p><strong>Test Your Changes</strong></p>
+<pre><code class="language-bash">npm install
+npm run build
+npm run serve
+</code></pre>
+</li>
+<li>
+<p><strong>Submit a Pull Request</strong></p>
+<ul>
+<li>Create a detailed description of your changes</li>
+<li>Include screenshots if applicable</li>
+<li>Reference any related issues</li>
+</ul>
+</li>
+</ol>
+<h3>Contribution Guidelines</h3>
+<h4>Code Style</h4>
+<ul>
+<li><strong>Consistent Formatting</strong> - Follow existing code style</li>
+<li><strong>Clear Comments</strong> - Add comments for complex logic</li>
+<li><strong>Error Handling</strong> - Include proper error handling</li>
+<li><strong>Testing</strong> - Test your changes thoroughly</li>
+</ul>
+<h4>Documentation</h4>
+<ul>
+<li><strong>Update README</strong> - Keep documentation current</li>
+<li><strong>Add Examples</strong> - Include usage examples</li>
+<li><strong>Clear Descriptions</strong> - Write clear feature descriptions</li>
+<li><strong>Screenshots</strong> - Add visual examples when helpful</li>
+</ul>
+<h4>Pull Request Process</h4>
+<ol>
+<li><strong>Issue Discussion</strong> - Discuss major changes in issues first</li>
+<li><strong>Small Changes</strong> - Keep changes focused and small</li>
+<li><strong>Clear Description</strong> - Explain what and why, not how</li>
+<li><strong>Testing</strong> - Ensure all tests pass</li>
+<li><strong>Documentation</strong> - Update relevant documentation</li>
+</ol>
+<h3>Areas for Contribution</h3>
+<h4>Features</h4>
+<ul>
+<li><strong>New Markdown Extensions</strong> - Add support for new markdown features</li>
+<li><strong>Theme System</strong> - Create additional themes</li>
+<li><strong>Plugin System</strong> - Build plugin architecture</li>
+<li><strong>Performance</strong> - Optimize build performance</li>
+</ul>
+<h4>Documentation</h4>
+<ul>
+<li><strong>Examples</strong> - Add more usage examples</li>
+<li><strong>Tutorials</strong> - Create step-by-step guides</li>
+<li><strong>API Documentation</strong> - Document internal APIs</li>
+<li><strong>Best Practices</strong> - Share best practices</li>
+</ul>
+<h4>Styling</h4>
+<ul>
+<li><strong>New Themes</strong> - Create alternative color schemes</li>
+<li><strong>Component Styling</strong> - Improve existing component styles</li>
+<li><strong>Responsive Design</strong> - Enhance mobile experience</li>
+<li><strong>Accessibility</strong> - Improve accessibility features</li>
+</ul>
+<h3>Getting Help</h3>
+<ul>
+<li><strong>GitHub Issues</strong> - Report bugs and request features</li>
+<li><strong>Discussions</strong> - Ask questions and share ideas</li>
+<li><strong>Documentation</strong> - Check existing documentation first</li>
+<li><strong>Examples</strong> - Look at existing examples for guidance</li>
+</ul>
+<h3>Code of Conduct</h3>
+<p>We are committed to providing a welcoming and inclusive environment for all contributors. Please:</p>
+<ul>
+<li><strong>Be Respectful</strong> - Treat others with respect</li>
+<li><strong>Be Inclusive</strong> - Welcome diverse perspectives</li>
+<li><strong>Be Constructive</strong> - Provide helpful feedback</li>
+<li><strong>Be Patient</strong> - Allow time for review and discussion</li>
+</ul>
+<hr>
+<p>Thank you for contributing to Redocs! Your help makes the project better for everyone. 🎉</p>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Theme Switcher
+    const lightThemeBtn = document.getElementById('light-theme');
+    const darkThemeBtn = document.getElementById('dark-theme');
+    
+    // Load saved theme from localStorage
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateActiveButton(savedTheme);
+    
+    // Theme switching functions
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      updateActiveButton(theme);
+    }
+    
+    function updateActiveButton(theme) {
+      if (theme === 'light') {
+        lightThemeBtn.classList.add('active');
+        darkThemeBtn.classList.remove('active');
+      } else {
+        darkThemeBtn.classList.add('active');
+        lightThemeBtn.classList.remove('active');
+      }
+    }
+    
+    // Event listeners
+    lightThemeBtn.addEventListener('click', () => setTheme('light'));
+    darkThemeBtn.addEventListener('click', () => setTheme('dark'));
+  </script>
+</body>
+</html>
+ 
